@@ -1,0 +1,23 @@
+<mat-toolbar color="primary">
+  Angular Material 2 App
+</mat-toolbar>
+<div class="basic-container">
+
+  <h2>Single selection of async list</h2>
+
+    <form [formGroup]="form">
+<app-select #bancoSelect formControlName="idBanco" [placeholder]="'Async List'"></app-select>
+    </form>
+  <p>
+   Parent 
+    Selected Bank: {{form.controls.idBanco?.value}}
+  </p>
+
+</div>
+
+<!--
+Copyright Google LLC All Rights Reserved.
+
+Use of this source code is governed by an MIT-style license that can be
+found in the LICENSE file at https://angular.io/license
+-->
