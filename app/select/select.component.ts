@@ -101,7 +101,7 @@ export class SelectComponent implements OnInit, ControlValueAccessor {
     }
     // filter the banks
     this.filteredList.next(
-      this.banks.filter(bank => bank.detalle.toLowerCase().indexOf(search) > -1)
+      this.values.filter(bank => bank.detalle.toLowerCase().indexOf(search) > -1)
     );
   }
 
