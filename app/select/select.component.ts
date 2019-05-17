@@ -88,13 +88,13 @@ export class SelectComponent implements OnInit, ControlValueAccessor {
   }
 
   private filterBanks() {
-    if (!this.banks) {
+    if (!this.values) {
       return;
     }
     // get the search keyword
     let search = this.filterCtrl.value;
     if (!search) {
-      this.filteredList.next(this.banks.slice());
+      this.filteredList.next(this.values.slice());
       return;
     } else {
       search = search.toLowerCase();
