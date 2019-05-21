@@ -39,18 +39,16 @@ public list = [
       //this.bancoSelect.startSelect();
     }, 3000);
 
-        setTimeout(() => {
-      this.bancoSelect.values.next(    [{detalle: 'hola 1', id: 1},
-    {detalle: 'hola 2', id: 2},
-    {detalle: 'banco 3', id: 3},
-    {detalle: 'banco 4', id: 4}]);
-      //this.bancoSelect.startSelect();
-    }, 6000)
+
 
   }
 
   ngAfterViewInit() {
 
+  }
+
+  opcionClickeada(value){
+    console.log('se ha clickeado la opcion '+ value);
   }
 
   ngOnDestroy() {
