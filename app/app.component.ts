@@ -35,9 +35,17 @@ public list = [
   ngOnInit() {
    // this.control.setValue(1);
     setTimeout(() => {
-      this.bancoSelect.values = this.list;
-      this.bancoSelect.startSelect();
-    }, 3000)
+      this.bancoSelect.values.next(this.list);
+      //this.bancoSelect.startSelect();
+    }, 3000);
+
+        setTimeout(() => {
+      this.bancoSelect.values.next(    [{detalle: 'hola 1', id: 1},
+    {detalle: 'hola 2', id: 2},
+    {detalle: 'banco 3', id: 3},
+    {detalle: 'banco 4', id: 4}]);
+      //this.bancoSelect.startSelect();
+    }, 6000)
 
   }
 

@@ -1,10 +1,11 @@
     <mat-form-field>
       <mat-select (selectionChange)="change($event.value)" [formControl]="control" [placeholder]="placeholder" #singleSelect>
-        <mat-select-search  [formControl]="filterCtrl"></mat-select-search>
+        <mat-select-search [ngClass]="{ 'is-invalid': true }"  [formControl]="filterCtrl"></mat-select-search>
         <mat-option *ngFor="let bank of filteredList | async" [value]="bank.id">
           {{bank.detalle}}
         </mat-option>
       </mat-select>
     </mat-form-field>
 Child:
-    {{control.value | json}}
+    {{control.errors | json}}
+  

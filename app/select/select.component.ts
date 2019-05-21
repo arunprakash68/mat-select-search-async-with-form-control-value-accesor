@@ -6,6 +6,7 @@ import {MatSelect} from '@angular/material';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { ReplaySubject } from 'rxjs/ReplaySubject';
 import { Subject } from 'rxjs/Subject';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { take, takeUntil } from 'rxjs/operators';
 interface ComboResponse {
  id: string;
@@ -34,7 +35,8 @@ export class SelectComponent implements OnInit, ControlValueAccessor {
   public filterCtrl: FormControl = new FormControl();
 
   /** list of banks */
-  @Input() public values: ComboResponse[] = [];
+ // @Input() public values: ComboResponse[] = [];
+     @Input() public values = new BehaviorSubject<ComboResponse[]>([]);
 
   /** list of banks filtered by search keyword */
   public filteredList: ReplaySubject<ComboResponse[]> = new ReplaySubject<ComboResponse[]>(1);
@@ -46,13 +48,17 @@ export class SelectComponent implements OnInit, ControlValueAccessor {
   private _onDestroy = new Subject<void>();
 
   ngOnInit() {
+    this.values.subscribe(()=>{
+          this.filteredList.next(this.values.value.slice());
+    })
+    this.startSelect();
   }
 
   public startSelect(){
 
 
     // load the initial bank list
-    this.filteredList.next(this.values.slice());
+
 
     // listen for search field value changes
     this.filterCtrl.valueChanges
@@ -88,20 +94,20 @@ export class SelectComponent implements OnInit, ControlValueAccessor {
   }
 
   private filterBanks() {
-    if (!this.values) {
+    if (!this.values.value) {
       return;
     }
     // get the search keyword
     let search = this.filterCtrl.value;
     if (!search) {
-      this.filteredList.next(this.values.slice());
+      this.filteredList.next(this.values.value.slice());
       return;
     } else {
       search = search.toLowerCase();
     }
     // filter the banks
     this.filteredList.next(
-      this.values.filter(bank => bank.detalle.toLowerCase().indexOf(search) > -1)
+      this.values.value.filter(bank => bank.detalle.toLowerCase().indexOf(search) > -1)
     );
   }
 
